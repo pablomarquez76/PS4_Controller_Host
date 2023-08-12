@@ -3,13 +3,13 @@ Allows ESP32 to communicate with PS4 controller (can be used to control robots a
 
 Use a PS4 controller with an ESP32
 
-This is heavily based the library https://github.com/aed3/PS4-esp32 use to connect a PS4 controller to an ESP32. This library add accelerometer and gyroscope features.
+This is heavily based the library on the work of Albert III (https://github.com/aed3/PS4-esp32) use to connect a PS4 controller to an ESP32. This library adds accelerometer and gyroscope features.
 
 Here's a video about how this library was made: https://youtu.be/BmlKBs27pgE
 
 This repo can be downloaded as a zip file and imported into the Arduino IDE as a library.
 
-Installation
+# Installation
 The instructions on how to do this are base off what can be found here
 
 The instructions below may no longer work. If they do not work for you, try applying changes from the various forks of this repo.
