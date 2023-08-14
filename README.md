@@ -10,8 +10,6 @@ This library adds accelerometer and gyroscope features.
 
 This link may be used to add more features to the library: https://www.psdevwiki.com/ps4/DS4-BT
 
-This repo can be downloaded as a zip file and imported into the Arduino IDE as a library.
-
 ## Installation
 The instructions on how to do this are base off what can be found [here](https://github.com/jvpernis/esp32-ps3/issues/3#issuecomment-517141523)
 1. You can add the ESP32 boards to your Arduino IDE by adding them to the Boards Manager:
