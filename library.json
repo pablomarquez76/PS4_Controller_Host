@@ -1,0 +1,24 @@
+{
+    "name": "PS4_Controller_Host",
+    "description": "Control ESP32 projects with PS4 controllers",
+    "keywords": "ESP32, PS4, Control, Communication, Joystick",
+    "authors":
+     {
+            "name": "Juan Pablo Marquez",
+            "email": "pablo.marquez.dsc@gmail.com",
+            "url": "https://github.com/pablomarquez76/PS4_Controller_Host",
+            "maintainer": true
+     },
+    "repository": 
+    {
+        "type": "git",
+         "url": "https://github.com/pablomarquez76/PS4_Controller_Host"
+    },
+    "version": "1.0.2",
+    "homepage": "https://github.com/pablomarquez76/PS4_Controller_Host",
+    "frameworks": "arduino",
+    "platforms": ["espressif32"],
+    "examples": [
+        "examples/*/*.ino"
+    ]
+}
