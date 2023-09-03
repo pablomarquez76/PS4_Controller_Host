@@ -18,15 +18,6 @@
 
 #endif  // ARDUINO_ARCH_ESP32
 
-/** ESP-IDF compatibility configuration option choices */
-#define IDF_COMPATIBILITY_MASTER_21165ED 3
-#define IDF_COMPATIBILITY_MASTER_D9CE0BB 2
-#define IDF_COMPATIBILITY_MASTER_21AF1D7 1
-
-#ifndef CONFIG_IDF_COMPATIBILITY
-#define CONFIG_IDF_COMPATIBILITY IDF_COMPATIBILITY_MASTER_21165ED
-#endif
-
 /** Size of the output report buffer for the Dualshock and Navigation
  * controllers */
 #define PS4_SEND_BUFFER_SIZE 77
