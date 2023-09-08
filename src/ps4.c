@@ -1,15 +1,13 @@
 #include "ps4.h"
-
 #include <esp_system.h>
 #include <string.h>
-
 #include "ps4_int.h"
 
 /********************************************************************************/
 /*                              C O N S T A N T S */
 /********************************************************************************/
 
-static const uint8_t hid_cmd_payload_ps4_enable[] = {0x43, 0x02};
+static const uint8_t hid_cmd_payload_ps4_enable[] = { 0x43, 0x02 };
 
 /********************************************************************************/
 /*                         L O C A L    V A R I A B L E S */
@@ -56,7 +54,9 @@ void ps4Init() {
 ** Returns          bool
 **
 *******************************************************************************/
-bool ps4IsConnected() { return is_active; }
+bool ps4IsConnected() {
+  return is_active;
+}
 
 /*******************************************************************************
 **
@@ -93,7 +93,7 @@ void ps4Enable() {
 **
 *******************************************************************************/
 void ps4Cmd(ps4_cmd_t cmd) {
-  hid_cmd_t hidCommand = {.data = {0x80, 0x00, 0xFF}};
+  hid_cmd_t hidCommand = { .data = { 0x80, 0x00, 0xFF } };
   uint16_t length = sizeof(hidCommand.data);
 
   hidCommand.code = hid_cmd_code_set_report | hid_cmd_code_type_output;
@@ -125,7 +125,7 @@ void ps4Cmd(ps4_cmd_t cmd) {
 **
 *******************************************************************************/
 void ps4SetLed(uint8_t r, uint8_t g, uint8_t b) {
-  ps4_cmd_t cmd = {0};
+  ps4_cmd_t cmd = { 0 };
 
   cmd.r = r;
   cmd.g = g;
@@ -144,7 +144,9 @@ void ps4SetLed(uint8_t r, uint8_t g, uint8_t b) {
 ** Returns          void
 **
 *******************************************************************************/
-void ps4SetOutput(ps4_cmd_t prevCommand) { ps4Cmd(prevCommand); }
+void ps4SetOutput(ps4_cmd_t prevCommand) {
+  ps4Cmd(prevCommand);
+}
 
 /*******************************************************************************
 **
@@ -187,7 +189,9 @@ void ps4SetConnectionObjectCallback(void* object, ps4_connection_object_callback
 ** Returns          void
 **
 *******************************************************************************/
-void ps4SetEventCallback(ps4_event_callback_t cb) { ps4_event_cb = cb; }
+void ps4SetEventCallback(ps4_event_callback_t cb) {
+  ps4_event_cb = cb;
+}
 
 /*******************************************************************************
 **
@@ -227,36 +231,34 @@ void ps4SetBluetoothMacAddress(const uint8_t* mac) {
 /********************************************************************************/
 /*                      L O C A L    F U N C T I O N S */
 /********************************************************************************/
-
 void ps4ConnectEvent(uint8_t is_connected) {
-    if (is_connected) {
-        ps4Enable();
-    } else {
-        is_active = false;
-    }
+  if (is_connected) {
+    ps4Enable();
+  } else {
+    is_active = false;
+  }
 }
 
-
 void ps4PacketEvent(ps4_t ps4, ps4_event_t event) {
-    // Trigger packet event, but if this is the very first packet
-    // after connecting, trigger a connection event instead
-    if (is_active) {
-        if(ps4_event_cb != NULL) {
-            ps4_event_cb(ps4, event);
-        }
-
-        if (ps4_event_object_cb != NULL && ps4_event_object != NULL) {
-            ps4_event_object_cb(ps4_event_object, ps4, event);
-        }
-    } else {
-        is_active = true;
-
-        if(ps4_connection_cb != NULL) {
-            ps4_connection_cb(is_active);
-        }
-
-        if (ps4_connection_object_cb != NULL && ps4_connection_object != NULL) {
-            ps4_connection_object_cb(ps4_connection_object, is_active);
-        }
+  // Trigger packet event, but if this is the very first packet
+  // after connecting, trigger a connection event instead
+  if (is_active) {
+    if (ps4_event_cb != NULL) {
+      ps4_event_cb(ps4, event);
     }
+
+    if (ps4_event_object_cb != NULL && ps4_event_object != NULL) {
+      ps4_event_object_cb(ps4_event_object, ps4, event);
+    }
+  } else {
+    is_active = true;
+
+    if (ps4_connection_cb != NULL) {
+      ps4_connection_cb(is_active);
+    }
+
+    if (ps4_connection_object_cb != NULL && ps4_connection_object != NULL) {
+      ps4_connection_object_cb(ps4_connection_object, is_active);
+    }
+  }
 }
