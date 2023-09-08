@@ -14,7 +14,7 @@
         "type": "git",
          "url": "https://github.com/pablomarquez76/PS4_Controller_Host"
     },
-    "version": "1.0.2",
+    "version": "1.0.4",
     "homepage": "https://github.com/pablomarquez76/PS4_Controller_Host",
     "frameworks": "arduino",
     "platforms": ["espressif32"],
