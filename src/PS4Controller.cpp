@@ -1,12 +1,13 @@
 #include "PS4Controller.h"
-
 #include <esp_bt_defs.h>
 #include <esp_bt_main.h>
 
 extern "C" {
+#include "esp_bt_device.h"
 #include "ps4.h"
 }
-
+#define ESP_BD_ADDR_HEX_STR "%hhx:%hhx:%hhx:%hhx:%hhx:%hhx"
+#define ESP_BD_ADDR_HEX_ARR(addr) addr[0], addr[1], addr[2], addr[3], addr[4], addr[5]
 #define ESP_BD_ADDR_HEX_PTR(addr) \
   (uint8_t*)addr + 0, (uint8_t*)addr + 1, (uint8_t*)addr + 2, \
   (uint8_t*)addr + 3, (uint8_t*)addr + 4, (uint8_t*)addr + 5
@@ -43,7 +44,7 @@ bool PS4Controller::begin() {
 
 bool PS4Controller::begin(const char* mac) {
   esp_bd_addr_t addr;
-    
+
   if (sscanf(mac, ESP_BD_ADDR_STR, ESP_BD_ADDR_HEX_PTR(addr)) != ESP_BD_ADDR_LEN) {
     log_e("Could not convert %s\n to a MAC address", mac);
     return false;
@@ -56,7 +57,22 @@ bool PS4Controller::begin(const char* mac) {
 
 void PS4Controller::end() {}
 
-bool PS4Controller::isConnected() { return ps4IsConnected(); }
+String PS4Controller::getAddress() {
+  String address = "";
+
+  if (btStarted()) {
+    char mac[18];
+    const uint8_t* addr = esp_bt_dev_get_address();
+    sprintf(mac, ESP_BD_ADDR_STR, ESP_BD_ADDR_HEX_ARR(addr));
+    address = String(mac);
+  }
+  
+  return address;
+}
+
+bool PS4Controller::isConnected() {
+  return ps4IsConnected();
+}
 
 void PS4Controller::setLed(uint8_t r, uint8_t g, uint8_t b) {
   output.r = r;
@@ -74,9 +90,13 @@ void PS4Controller::setFlashRate(uint8_t onTime, uint8_t offTime) {
   output.flashOff = offTime / 10;
 }
 
-void PS4Controller::sendToController() { ps4SetOutput(output); }
+void PS4Controller::sendToController() {
+  ps4SetOutput(output);
+}
 
-void PS4Controller::attach(callback_t callback) { _callback_event = callback; }
+void PS4Controller::attach(callback_t callback) {
+  _callback_event = callback;
+}
 
 void PS4Controller::attachOnConnect(callback_t callback) {
   _callback_connect = callback;
@@ -108,8 +128,7 @@ void PS4Controller::_connection_callback(void* object, uint8_t isConnected) {
     if (This->_callback_connect) {
       This->_callback_connect();
     }
-  }
-  else {
+  } else {
     if (This->_callback_disconnect) {
       This->_callback_disconnect();
     }
