@@ -19,11 +19,11 @@ enum ps4_packet_index {
 
   packet_index_analog_l2 = 20,
   packet_index_analog_r2 = 21,
-      
+
   packet_index_sensor_gyroscope_x = 25,
   packet_index_sensor_gyroscope_y = 27,
   packet_index_sensor_gyroscope_z = 29,
-  
+
   packet_index_sensor_accelerometer_x = 31,
   packet_index_sensor_accelerometer_y = 33,
   packet_index_sensor_accelerometer_z = 35,
@@ -92,7 +92,9 @@ static ps4_event_callback_t ps4_event_cb = NULL;
 /********************************************************************************/
 /*                      P U B L I C    F U N C T I O N S */
 /********************************************************************************/
-void parserSetEventCb(ps4_event_callback_t cb) { ps4_event_cb = cb; }
+void parserSetEventCb(ps4_event_callback_t cb) {
+  ps4_event_cb = cb;
+}
 
 void parsePacket(uint8_t* packet) {
   ps4_t prev_ps4 = ps4;
@@ -202,7 +204,7 @@ ps4_analog_stick_t parsePacketAnalogStick(uint8_t* packet) {
   else ps4AnalogStick.rx = packet[packet_index_analog_stick_rx] + offset;
   if (packet[packet_index_analog_stick_ry] == 0) ps4AnalogStick.ry = minJ;
   else ps4AnalogStick.ry = packet[packet_index_analog_stick_ry] + offset;
-  
+
   return ps4AnalogStick;
 }
 
@@ -277,12 +279,12 @@ ps4_status_t parsePacketStatus(uint8_t* packet) {
 ps4_sensor_t parsePacketSensor(uint8_t* packet) {
   ps4_sensor_t ps4Sensor;
 
-	  ps4Sensor.gyroscope.x     = (packet[packet_index_sensor_gyroscope_x+1]  << 8)    +  packet[packet_index_sensor_gyroscope_x] ;
-      ps4Sensor.gyroscope.y     = (packet[packet_index_sensor_gyroscope_y+1]  << 8)    +  packet[packet_index_sensor_gyroscope_y];
-      ps4Sensor.gyroscope.z     = (packet[packet_index_sensor_gyroscope_z+1]  << 8)    +  packet[packet_index_sensor_gyroscope_z];
-      ps4Sensor.accelerometer.x = (packet[packet_index_sensor_accelerometer_x+1] << 8) +  packet[packet_index_sensor_accelerometer_x];
-      ps4Sensor.accelerometer.y = (packet[packet_index_sensor_accelerometer_y+1] << 8) +  packet[packet_index_sensor_accelerometer_y];
-      ps4Sensor.accelerometer.z = (packet[packet_index_sensor_accelerometer_z+1] << 8) +  packet[packet_index_sensor_accelerometer_z];
+  ps4Sensor.gyroscope.x = (packet[packet_index_sensor_gyroscope_x + 1] << 8) + packet[packet_index_sensor_gyroscope_x];
+  ps4Sensor.gyroscope.y = (packet[packet_index_sensor_gyroscope_y + 1] << 8) + packet[packet_index_sensor_gyroscope_y];
+  ps4Sensor.gyroscope.z = (packet[packet_index_sensor_gyroscope_z + 1] << 8) + packet[packet_index_sensor_gyroscope_z];
+  ps4Sensor.accelerometer.x = (packet[packet_index_sensor_accelerometer_x + 1] << 8) + packet[packet_index_sensor_accelerometer_x];
+  ps4Sensor.accelerometer.y = (packet[packet_index_sensor_accelerometer_y + 1] << 8) + packet[packet_index_sensor_accelerometer_y];
+  ps4Sensor.accelerometer.z = (packet[packet_index_sensor_accelerometer_z + 1] << 8) + packet[packet_index_sensor_accelerometer_z];
 
   return ps4Sensor;
 }
