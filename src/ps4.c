@@ -4,13 +4,13 @@
 #include "ps4_int.h"
 
 /********************************************************************************/
-/*                              C O N S T A N T S */
+/*                              C O N S T A N T S                               */
 /********************************************************************************/
 
 static const uint8_t hid_cmd_payload_ps4_enable[] = { 0x43, 0x02 };
 
 /********************************************************************************/
-/*                         L O C A L    V A R I A B L E S */
+/*                         L O C A L    V A R I A B L E S                       */
 /********************************************************************************/
 
 static ps4_connection_callback_t ps4_connection_cb = NULL;
@@ -24,7 +24,7 @@ static void* ps4_event_object = NULL;
 static bool is_active = false;
 
 /********************************************************************************/
-/*                      P U B L I C    F U N C T I O N S */
+/*                      P U B L I C    F U N C T I O N S                        */
 /********************************************************************************/
 
 /*******************************************************************************
@@ -41,6 +41,22 @@ static bool is_active = false;
 void ps4Init() {
   sppInit();
   ps4_l2cap_init_services();
+}
+
+/*******************************************************************************
+**
+** Function         ps4Deinit
+**
+** Description      This deinitializes the bluetooth services to stop
+**                  listening for incoming connections.
+**
+**
+** Returns          void
+**
+*******************************************************************************/
+void ps4Deinit() {
+    ps4_l2cap_deinit_services();
+    spp_deinit();
 }
 
 /*******************************************************************************
@@ -116,7 +132,7 @@ void ps4Cmd(ps4_cmd_t cmd) {
 
 /*******************************************************************************
 **
-** Function         ps4SetLedOnly
+** Function         ps4SetLed
 **
 ** Description      Sets the LEDs on the PS4 controller.
 **
