@@ -19,7 +19,7 @@ public:
 
   bool begin();
   bool begin(const char* mac);
-  void end();
+  bool end();
 
   String getAddress();
 
