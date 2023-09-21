@@ -55,7 +55,10 @@ bool PS4Controller::begin(const char* mac) {
   return begin();
 }
 
-void PS4Controller::end() {}
+bool PS4Controller::end() {
+  ps4Deinit();
+  return true;
+}
 
 String PS4Controller::getAddress() {
   String address = "";
