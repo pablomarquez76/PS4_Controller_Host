@@ -137,6 +137,7 @@ typedef void (*ps4_event_object_callback_t)(void* object, ps4_t ps4, ps4_event_t
 
 bool ps4IsConnected();
 void ps4Init();
+void ps4Deinit();
 void ps4Enable();
 void ps4Cmd(ps4_cmd_t ps4_cmd);
 void ps4SetConnectionCallback(ps4_connection_callback_t cb);
