@@ -89,8 +89,8 @@ void PS4Controller::setRumble(uint8_t small, uint8_t large) {
 }
 
 void PS4Controller::setFlashRate(uint8_t onTime, uint8_t offTime) {
-  output.flashOn = onTime / 10;
-  output.flashOff = offTime / 10;
+  output.flashOn = onTime;
+  output.flashOff = offTime;
 }
 
 void PS4Controller::sendToController() {
