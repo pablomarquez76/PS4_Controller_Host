@@ -38,7 +38,7 @@ void loop() {
     nextRainbowColor();
 
     // Sets how fast the controller's front light flashes
-    // Params: How long the light is on in ms, how long the light is off in ms
+    // Params: How long the light is on , how long the light is off
     // Range: 0->255 (255 = 2550ms), Set to 0, 0 for the light to remain on
     PS4.setFlashRate(PS4.LStickY(), PS4.RStickY());
 
