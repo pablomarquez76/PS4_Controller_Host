@@ -39,8 +39,8 @@ void loop() {
 
     // Sets how fast the controller's front light flashes
     // Params: How long the light is on in ms, how long the light is off in ms
-    // Range: 0->2550 ms, Set to 0, 0 for the light to remain on
-    PS4.setFlashRate(PS4.LStickY() * 10, PS4.RStickY() * 10);
+    // Range: 0->255 (255 = 2550ms), Set to 0, 0 for the light to remain on
+    PS4.setFlashRate(PS4.LStickY(), PS4.RStickY());
 
     // Sets the rumble of the controllers
     // Params: Weak rumble intensity, Strong rumble intensity
