@@ -6,7 +6,7 @@
 /* Detect ESP-IDF releases */
 #include <esp_idf_version.h>
 
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(3, 2, 0)
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 4, 1)
 #include "esp_mac.h" //
 #include "esp_spp_api.h" //
 #endif
@@ -64,7 +64,7 @@ void ps4Init() {
 *******************************************************************************/
 void ps4Deinit() {
     ps4_l2cap_deinit_services();
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(3, 2, 0)
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 4, 1)
     esp_spp_deinit();
 #else
 	  spp_deinit();
@@ -253,7 +253,7 @@ void ps4SetBluetoothMacAddress(const uint8_t* mac) {
   uint8_t baseMac[6];
   memcpy(baseMac, mac, 6);
   baseMac[5] -= 2;
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(3, 2, 0)
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 4, 1)
   esp_iface_mac_addr_set(baseMac, ESP_MAC_BASE);
 #else
 	esp_base_mac_addr_set(baseMac);
