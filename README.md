@@ -29,4 +29,16 @@ When a PS4 controller is 'paired' to a PS4 console, it just means that it has st
 
 Therefore, if you want to connect your PS4 controller to the ESP32, you either need to figure out what the Bluetooth MAC address of your PS4 console is and set the ESP32's address to it, or change the MAC address stored in the PS4 controller.
 
-Whichever path you choose, you might want a tool to read and/or write the currently paired MAC address from the PS4 controller. You can try using [sixaxispairer](https://github.com/user-none/sixaxispairer) for this purpose.
+```Note that PS4.Begin("00:00:00:00:00") can take mac address as a parameter and preparess the host for you. So you dont really need to fake esp32 mac address``` 
+
+## Basic example
+```mermaid
+graph TB
+A[Connect dualshock to PC so it remembers your PC's MAC address to autoconnect]
+B[Run `bluetoothctl info` to get MAC address of your PC's bluetooth device]
+C['Forget' dualshock from PC to prevent it connecting]
+D[In your ESP32 code use that MAC as parameter of PS4.Begin function]
+A --> B
+B --> C
+C --> D
+```
