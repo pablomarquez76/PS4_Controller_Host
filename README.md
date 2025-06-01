@@ -29,4 +29,4 @@ When a PS4 controller is 'paired' to a PS4 console, it just means that it has st
 
 Therefore, if you want to connect your PS4 controller to the ESP32, you either need to figure out what the Bluetooth MAC address of your PS4 console is and set the ESP32's address to it, or change the MAC address stored in the PS4 controller.
 
-Whichever path you choose, you might want a tool to read and/or write the currently paired MAC address from the PS4 controller. You can try using [sixaxispairer](https://github.com/user-none/sixaxispairer) for this purpose.
+Whichever path you choose, you might want a tool to read and/or write the currently paired MAC address from the PS4 controller. You can try using SixaxisPairTool software for this purpose.
