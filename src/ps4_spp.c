@@ -58,6 +58,11 @@ void sppInit() {
     return;
   }
 
+  /* v4.0.0
+  esp_spp_cfg_t bt_spp_cfg = BT_SPP_DEFAULT_CONFIG();
+  if ((ret = esp_spp_enhanced_init(&bt_spp_cfg)) != ESP_OK) {
+  */
+  
   if ((ret = esp_spp_init(ESP_SPP_MODE_CB)) != ESP_OK) {
     ESP_LOGE(PS4_TAG, "%s spp init failed: %s\n", __func__, esp_err_to_name(ret));
     return;
